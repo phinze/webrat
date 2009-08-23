@@ -169,4 +169,30 @@ describe "field_labeled" do
     should_raise_error_matching /Could not find .* "Other License #"/, :for => "Other License #"
   end
 
+  describe "finding a field whose label is prefixed with a number" do
+    using_this_html <<-HTML
+      <html>
+      <form>
+      <label for="what_is_quest">2. What is your quest?</label>
+      <input type="text" id="what_is_quest" />
+      </form>
+      </html>
+    HTML
+
+    with_an_id_of  "what_is_quest",    :for => "What is your quest?"
+  end
+
+  describe "finding a field whose label is suffixed with a colon" do
+    using_this_html <<-HTML
+      <html>
+      <form>
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" />
+      </form>
+      </html>
+    HTML
+
+    with_an_id_of   "first_name",      :for => "First Name"
+  end
+
 end
